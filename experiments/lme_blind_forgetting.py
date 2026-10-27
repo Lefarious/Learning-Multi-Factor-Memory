@@ -165,7 +165,7 @@ def load_from_cache(path, n_cases: int | None = None) -> list[list[dict]]:
     cached cases (None = all).
     """
     cases: list[list[dict]] = []
-    with Path(path).open() as f:
+    with Path(path).open(encoding="utf-8") as f:
         for line in f:
             line = line.strip()
             if not line:

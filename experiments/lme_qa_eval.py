@@ -83,7 +83,7 @@ def load_cache_index(path: str | Path) -> list[dict]:
     lme_blind_forgetting.py). Each record: {"qid": str, "turns": [..]}.
     """
     out: list[dict] = []
-    with Path(path).open() as f:
+    with Path(path).open(encoding="utf-8") as f:
         for line in f:
             line = line.strip()
             if line:
@@ -93,7 +93,7 @@ def load_cache_index(path: str | Path) -> list[dict]:
 
 def load_learned_weights(path: str | Path) -> dict[str, float]:
     """learned_weights_blind_mean from the full blind-forgetting JSON."""
-    d = json.loads(Path(path).read_text())
+    d = json.loads(Path(path).read_text(encoding="utf-8"))
     w = d.get("learned_weights_blind_mean")
     if not w:
         raise SystemExit(f"no learned_weights_blind_mean in {path}")
@@ -222,7 +222,7 @@ def run_prep(args) -> None:
                 "kept":         kept,
             })
 
-    with out_path.open("w") as f:
+    with out_path.open("w", encoding="utf-8") as f:
         for row in rows_out:
             f.write(json.dumps(row) + "\n")
 
@@ -255,7 +255,7 @@ def run_prep(args) -> None:
 def load_verdicts(path: str | Path) -> list[dict]:
     """Read the controller's verdicts JSONL: {qid, policy, correct}."""
     out: list[dict] = []
-    with Path(path).open() as f:
+    with Path(path).open(encoding="utf-8") as f:
         for line in f:
             line = line.strip()
             if not line:

@@ -167,7 +167,7 @@ def build(
 
     n_written = 0
     n_seen = 0
-    with out.open("w") as f:
+    with out.open("w", encoding="utf-8") as f:
         for case in cases:
             if n_seen >= n_cases:
                 break
